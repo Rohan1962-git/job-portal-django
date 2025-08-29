@@ -1,0 +1,16 @@
+{% extends "portal/base.html" %}
+
+{% for job in jobs %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ job.title }}</h5>
+      <p>{{ job.description }}</p>
+      <p><strong>Company:</strong> {{ job.company.name }} | <strong>Location:</strong> {{ job.company.location }}</p>
+
+      <!-- Buttons for managing the job -->
+      <a href="{% url 'edit_job' job.id %}" class="btn btn-secondary">Edit</a>
+      <a href="{% url 'delete_job' job.id %}" class="btn btn-danger">Delete</a>
+      <a href="{% url 'job_applicants' job.id %}" class="btn btn-primary">View Applicants</a>
+    </div>
+  </div>
+{% endfor %}

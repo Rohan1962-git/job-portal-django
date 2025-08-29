@@ -1,0 +1,23 @@
+{% extends "portal/base.html" %}
+
+{% block content %}
+  <h2>Available Jobs</h2>
+  <ul>
+    {% for job in jobs %}
+      <li>
+        <strong>{{ job.title }}</strong> - {{ job.company }} <br>
+        <em>{{ job.location }}</em>
+
+        {% if job.id in applied_jobs %}
+          <span class="text-success">✅ Already Applied</span>
+        {% else %}
+          <form method="post" action="{% url 'apply_job' job.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Apply</button>
+          </form>
+        {% endif %}
+      </li>
+      <hr>
+    {% endfor %}
+  </ul>
+{% endblock %}
